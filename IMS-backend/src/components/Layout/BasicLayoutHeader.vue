@@ -1,37 +1,27 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, ref } from 'vue'
 import { HeartOutlined, PoweroffOutlined, DownOutlined } from '@ant-design/icons-vue'
 import Cookies from 'js-cookie';
-// import LocalCache from '@/utils/cache';
 import userService from '@/services/user.js';
+import { pinyin } from 'pinyin-pro';
 
-// import { computed } from 'vue';
-// import { useStore } from '@/stores/index.js';
-// const store = useStore();
-// const userInfo = computed(() => store.userInfo);
-
-// function handleNavToLogin() {
-//   console.log('handleNavToLoagin');
-// }
-
-// function handleCommand(command) {
-//   console.log(command);
-// }
-
-// let userInfo = LocalCache.getCache('userInfo')
-const userInfo = reactive({
+const userInfo = ref({
   id: null,
   name: null,
   role_name: null,
 })
+const avatar = ref();
+
 onMounted(() => {
   userService.getUserInfo().then(res => {
-    userInfo.id = res.data.id;
-    userInfo.name = res.data.name;
-    userInfo.role_name = res.data.role_name;
+    userInfo.value.id = res.data.id;
+    userInfo.value.name = res.data.name;
+    userInfo.value.role_name = res.data.role_name;
+    avatar.value = pinyin(userInfo.value.name, { toneType: 'none' })[0].toUpperCase()
   })
 })
-let handleQuit = function () {
+
+function handleQuit() {
   Cookies.remove('web_token')
   location.reload()
 }
@@ -44,12 +34,9 @@ let handleQuit = function () {
     <div class="header-hd"></div>
     <div class="header-bd"></div>
     <div class="header-ft">
-      <div class="bar-info-container">
-        <HeartOutlined />
-      </div>
       <el-dropdown style="height:100%">
         <div class="bar-info-container">
-          <i class="userInfo-avatar"></i>
+          <i class="userInfo-avatar">{{ avatar }}</i>
           <span class="userInfo-name">{{ userInfo.name }} （{{ userInfo.role_name }}）</span>
           <DownOutlined :style="{ fontsize: '10px', marginLeft: '4px' }" />
         </div>
@@ -107,15 +94,18 @@ let handleQuit = function () {
 
   .userInfo-avatar {
     display: inline-block;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
     text-align: center;
-    background-color: #ccc;
     border-radius: 50%;
     margin: 0 10px;
-    background-image: url('@/assets/images/avatar.webp');
     background-size: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    color: #fafafa;
+    background-color: #0384d4;
   }
 }
 </style>

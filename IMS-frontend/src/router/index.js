@@ -5,6 +5,8 @@ import NProgress from 'nprogress';
 import userService from '@/services/user';
 import { useStore } from '@/stores/index.js';
 
+import classificationService from '@/services/classification';
+
 const TOKEN_KEY = 'web_token';
 const appRouter = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,8 +22,14 @@ const appRouter = createRouter({
 appRouter.firstInit = false; // 只触发一次的锁
 appRouter.beforeEach(async (to, from, next) => {
   NProgress.start();
-
   if (to.meta.title) document.title = to.meta.title;
+  // 动态改变页面的名称（title）
+  if (to.name === 'classification') {
+    let classifications = await classificationService.getAllClassifications();
+    let classification = classifications.data.find((e) => e.id == to.params.id);
+    document.title = classification['name'];
+    // console.log(res.find(e=>e.id==to.params.id));
+  }
 
   const store = useStore();
   const token = cookies.get(TOKEN_KEY);

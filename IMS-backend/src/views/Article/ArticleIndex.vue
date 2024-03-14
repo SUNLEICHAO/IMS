@@ -1,10 +1,10 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
-import { useRoute, useRouter, RouterView } from 'vue-router';
-import articleService from '@/services/article';
-import ArticleHeader from "@/components/Common/ArticleHeader.vue"
 import { ElMessage, ElMessageBox } from 'element-plus'
+import ArticleHeader from "@/components/Common/ArticleHeader.vue"
+import articleService from '@/services/article';
 
 const router = useRouter()
 onMounted(() => {
@@ -21,8 +21,6 @@ function getData() {
   })
 }
 function handleDeleteArticle(scope) {
-  // console.log(scope.row.id);
-
   ElMessageBox.confirm(
     '该操作将删除该文章，确认？',
     'Warning',
@@ -54,9 +52,6 @@ function handleGoEdit(scope) {
   })
 }
 
-
-
-
 </script>
 
 <template>
@@ -66,7 +61,6 @@ function handleGoEdit(scope) {
         <span class="header-action" @click="router.push('/article/create')">新建文章</span>
       </template>
     </ArticleHeader>
-    <el-divider />
     <div class="page-body">
       <div class="table-section">
         <el-table :data="articleData" style="width: 1000px;">

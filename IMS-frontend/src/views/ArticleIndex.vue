@@ -1,9 +1,11 @@
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 import articleService from '@/services/article';
 
-import { useRoute, useRouter } from 'vue-router';
 const route = useRoute();
+const article = ref()
+
 onMounted(() => {
   console.log(route.query.id);
   articleService.getOneArticle(route.params.id).then(res => {
@@ -15,7 +17,6 @@ onMounted(() => {
   })
 })
 
-const article = ref()
 </script>
 
 <template>
@@ -57,7 +58,6 @@ const article = ref()
     }
 
     .article-content {
-      // paddding
       padding: 20px 0 40px;
     }
   }

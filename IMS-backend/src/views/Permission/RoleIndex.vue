@@ -49,7 +49,7 @@ let handleAdd = function () {
 </script>
 
 <template>
-  <div class="role-index main-topic">RoleIndex</div>
+  <div class="role-index main-topic">角色管理</div>
   <div class="table">
     <el-table :data="roles" stripe style="width: 100%">
       <el-table-column prop="id" label="角色ID" width="100" />

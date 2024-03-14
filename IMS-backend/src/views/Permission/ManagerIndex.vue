@@ -21,22 +21,19 @@ let handleAdd = function () {
 
 </script>
 <template>
-  <div class="manager-index main-topic">ManagerIndex</div>
-  <div class="table">
-    <el-table :data="users" style="width: 100%">
-      <el-table-column prop="user_id" label="用户ID" width="180" />
-      <el-table-column prop="user_name" label="用户名称" width="180" />
-      <el-table-column prop="phone" label="电话" width="180" />
-      <el-table-column prop="role_name" label="角色" width="180" />
-      <!-- <el-table-column label="操作">
-      <template #default="scope">
-        <el-button link type="primary" size="small" @click="handleEdit(scope.row)">修改</el-button>
-        <el-button link type="primary" size="small" @click="handleDelete(scope.row)">删除</el-button>
-      </template>
-    </el-table-column> -->
-    </el-table>
-    <el-button class="mt-4 role-add" @click="handleAdd">添加用户</el-button>
+  <div class="manager-index">
+    <div class=" main-topic">用户管理</div>
+    <div class="table">
+      <el-table :data="users" style="width: 100%">
+        <el-table-column prop="user_id" label="用户ID" width="180" />
+        <el-table-column prop="user_name" label="用户名称" width="180" />
+        <el-table-column prop="phone" label="电话" width="180" />
+        <el-table-column prop="role_name" label="角色" width="180" />
+      </el-table>
+      <el-button class="mt-4 role-add" @click="handleAdd">添加用户</el-button>
+    </div>
   </div>
+
 </template>
 
 <style type="text/css" lang="less" scoped>

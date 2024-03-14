@@ -1,15 +1,14 @@
 <script setup>
-import { ref, onMounted, computed, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import articleService from '@/services/article';
 
-import { useRoute, useRouter } from 'vue-router';
-
-
-// import { QuillEditor } from '@vueup/vue-quill'
-// import '@vueup/vue-quill/dist/vue-quill.snow.css';
+const router = useRouter();
+const route = useRoute();
+// 请求该类别下的所有文章
+const articleData = ref([])
 
 onMounted(() => {
-  // classification_id.value = route.params.id
   classification_id.value = route.params.id
   getData()
 })
@@ -24,33 +23,18 @@ function getData() {
   })
 }
 
-const route = useRoute();
-const router = useRouter();
-// const classification_id = computed(() => {
-//   getData()
-//   return route.params.id
-// })
-
 let classification_id = ref(null)
 watch(() => route.path, (newPath, oldPath) => {
-  // console.log(newPath)
   getData()
   classification_id.value = route.params;
-},
-  // { immediate: true }
+}
 );
-// watch(route.params.id, (new)=> {
-//   console.log(new);
-//   // getData()
-//   // return route.params.id
-// })
-// 请求该类别下的所有文章
-const articleData = ref([])
 
 function handleGoArticle(e) {
   console.log(e.id);
   router.push(`/article/${e.id}`)
 }
+
 </script>
 
 <template>

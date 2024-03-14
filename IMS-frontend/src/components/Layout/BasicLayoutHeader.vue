@@ -1,14 +1,14 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from '@/stores/index.js';
-
 import classificationService from '@/services/classification';
+
 const store = useStore();
 const userInfo = computed(() => store.userInfo);
 const classifications = ref([])
+
 onMounted(() => {
   classificationService.getAllClassifications().then(res => {
-    // console.log(res.data);   
     classifications.value.push(...res.data)
   })
 })
@@ -20,7 +20,6 @@ function handleNavToLogin() {
 function handleCommand(command) {
   console.log(command);
 }
-
 
 </script>
 <template>
@@ -65,13 +64,7 @@ function handleCommand(command) {
 
 <style type="text/css" lang="less" scoped>
 .page-header {
-  // background-color: #555;
-  // background-color: #545652;
   background-color: #2d3a3a;
-  // margin-left: 100px;
-  // box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.05);
-  // height: 20px;
-  // color: #cdd5bc;
 
   .header-content {
     width: 1200px;
@@ -104,7 +97,6 @@ function handleCommand(command) {
         position: relative;
         font-size: 14px;
         line-height: 40px;
-        // color: #666;
         color: #b3b3b3;
         margin-right: 32px;
         text-decoration: none;
@@ -114,7 +106,6 @@ function handleCommand(command) {
         }
 
         &:hover {
-          // color: #35b558;
           color: #fff;
 
           &:after {
@@ -122,7 +113,6 @@ function handleCommand(command) {
             content: '';
             width: 110%;
             height: 2px;
-            // background: #35b558;
             background: #67b8f3;
             bottom: -4px;
             left: 50%;

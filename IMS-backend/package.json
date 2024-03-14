@@ -18,6 +18,7 @@
     "js-cookie": "^3.0.5",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
+    "pinyin-pro": "^3.19.6",
     "quill-blot-formatter": "^1.0.5",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"

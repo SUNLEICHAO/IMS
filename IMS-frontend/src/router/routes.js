@@ -16,7 +16,10 @@ export default [
       {
         path: '/',
         name: 'Home',
-        component: Home
+        component: Home,
+        meta: {
+          title: '首页'
+        }
       },
       {
         path: '/classification/:id',
@@ -28,7 +31,7 @@ export default [
         name: 'article',
         component: Article
       },
-      ...routesAcademy,
+      ...routesAcademy
       // ...routesClassification
     ]
   },

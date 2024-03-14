@@ -1,17 +1,18 @@
 <script setup>
 import { RouterView } from 'vue-router';
+
 </script>
 
 <template>
-  <div class="article-layout">
-    <router-view></router-view>
+  <div class="permission-page">
+    <RouterView />
   </div>
 </template>
 
 <style type="text/css" lang="less" scoped>
-.article-layout {
+.permission-page {
   margin-top: 20px;
-  background-color: #fff;
   padding: 10px;
+  background-color: #fff;
 }
 </style>

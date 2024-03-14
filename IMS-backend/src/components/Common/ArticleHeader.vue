@@ -19,20 +19,21 @@ const props = defineProps({
       </slot>
     </div>
   </div>
+  <el-divider />
 </template>
 
 <style type="text/css" lang="less" scoped>
 .page-header {
-  // text-align: right;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // background-color: #fff;
 
   .header-title {
     font-size: 26px;
   }
+}
 
-  
+.el-divider {
+  margin: 10px 0;
 }
 </style>

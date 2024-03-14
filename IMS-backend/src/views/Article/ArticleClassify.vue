@@ -1,12 +1,15 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
+import { ref, onMounted } from 'vue';
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons-vue';
 import ArticleHeader from "@/components/Common/ArticleHeader.vue"
 import classificationService from '@/services/classification';
-import { useRoute, useRouter, RouterView } from 'vue-router';
-import articleService from '@/services/article';
-const router = useRouter()
+// import { useRouter } from 'vue-router';
+// import articleService from '@/services/article';
+// const router = useRouter()
+
+const classificationData = ref([])
+
 onMounted(() => {
   getData()
 })
@@ -15,11 +18,9 @@ function getData() {
   classificationService.getAllClassifications().then(res => {
     classificationData.value = []
     classificationData.value.push(...res.data)
-    console.log(res.data);
   })
 }
 
-const classificationData = ref([])
 function handleGoEdit(classification) {
   ElMessageBox.prompt('请在下面完成类名的修改', '类名修改', {
     confirmButtonText: '完成',
@@ -78,8 +79,8 @@ function handleDeleteClassification(id) {
     })
 
 }
-function handleInsertClassification() {
 
+function handleInsertClassification() {
   ElMessageBox.prompt('请输入要添加的类名', '添加分类', {
     confirmButtonText: '完成',
     cancelButtonText: '取消',
@@ -89,12 +90,6 @@ function handleInsertClassification() {
   })
     .then(({ value }) => {
       classificationService.insertClassification({ name: value })
-      // router.push('/article/classify')
-      // classificationData.value.forEach(e => {
-      //   if (e.id == classification.id) {
-      //     e.name = value
-      //   }
-      // })
       getData()
       ElMessage({
         type: 'success',
@@ -142,4 +137,12 @@ function handleInsertClassification() {
   </div>
 </template>
 
-<style type="text/css" lang="less" scoped></style>
+<style type="text/css" lang="less" scoped>
+.page-body {
+  .table-section {
+    .el-table {
+      padding-bottom: 40px;
+    }
+  }
+}
+</style>

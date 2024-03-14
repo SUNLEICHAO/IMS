@@ -1,7 +1,7 @@
 import BasicLayout from '@/components/Layout/BasicLayout.vue';
 import Home from '@/views/HomeIndex.vue';
 import NotFound from '@/views/Common/NotFound.vue';
-import routesAcademy from './routesAcademy';
+// import routesAcademy from './routesAcademy';
 import Forbidden from '@/views/Common/Forbidden.vue';
 import AccountLogin from '@/views/Common/AccountLogin.vue';
 import routesPermission from './routesPermission';

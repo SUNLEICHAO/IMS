@@ -25,7 +25,6 @@ appRouter.beforeEach(async (to, from, next) => {
   NProgress.start();
 
   if (to.meta.title) document.title = to.meta.title;
-  console.log(to.meta.title);
 
   const store = useStore();
   const token = cookies.get(TOKEN_KEY);

@@ -8,10 +8,10 @@ exports.seed = async function (knex) {
   await knex("classifications").del();
   await knex("article_classifications").del();
   await knex("articles").insert([
-    { id: 1, title: "百亿补贴为什么用 H5？H5 未来会如何发展？", content: "~" },
-    { id: 2, title: "不要再写满屏import导入啦！", content: "~" },
-    { id: 3, title: "真实前端面试题（蚂蚁外包）", content: "~" },
-    { id: 4, title: "vue原理分析", content: "~" },
+    { id: 1, title: "百亿补贴为什么用 H5？H5 未来会如何发展？", content: "" },
+    { id: 2, title: "不要再写满屏import导入啦！", content: "" },
+    { id: 3, title: "真实前端面试题（蚂蚁外包）", content: "" },
+    { id: 4, title: "vue原理分析", content: "" },
   ]);
   await knex("classifications").insert([
     { id: 1, name: "技术动态" },

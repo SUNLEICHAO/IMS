@@ -9,8 +9,6 @@ const route = useRoute();
 const { permissions } = useStore();
 
 const navRoutes = ref(formatRoutes(routesAll, permissions));
-// console.log(navRoutes.value);
-// console.log(permissions);
 // 更改为计算属性后，页面内通过router跳转时可以更新，ref时不可以。
 // const activeIndex = ref(route.name);
 const activeIndex = computed(() => route.name);
@@ -20,12 +18,10 @@ function handleGoHome() {
   router.push('/')
 }
 
-
 </script>
 
 <template>
-  <!-- <h1>s</h1> -->
-  <div class="sider-section" :style="[{ width: '243px' }]" @click="console.log(navRoutes)">
+  <div class="sider-section" :style="[{ width: '243px' }]">
     <div class="logo-section">
       <div class="header-logo-container" @click="handleGoHome">
         <!-- <img v-show="!isCollapse" class="header-logo-element" alt="斗西家计划" src="@/assets/logo.svg" /> -->
