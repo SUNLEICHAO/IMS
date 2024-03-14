@@ -1,0 +1,136 @@
+<script setup>
+import { ref, onMounted, computed, watch } from 'vue';
+import articleService from '@/services/article';
+
+import { useRoute, useRouter } from 'vue-router';
+
+
+// import { QuillEditor } from '@vueup/vue-quill'
+// import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
+onMounted(() => {
+  // classification_id.value = route.params.id
+  classification_id.value = route.params.id
+  getData()
+})
+
+function getData() {
+  articleService.getAllArticles({ classification_id: route.params.id }).then(res => {
+    articleData.value = res.data.result.map((e, index) => {
+      e['serial'] = index + 1
+      e['created_time'] = new Date(e.created_at).toLocaleString()
+      return e
+    });
+  })
+}
+
+const route = useRoute();
+const router = useRouter();
+// const classification_id = computed(() => {
+//   getData()
+//   return route.params.id
+// })
+
+let classification_id = ref(null)
+watch(() => route.path, (newPath, oldPath) => {
+  // console.log(newPath)
+  getData()
+  classification_id.value = route.params;
+},
+  // { immediate: true }
+);
+// watch(route.params.id, (new)=> {
+//   console.log(new);
+//   // getData()
+//   // return route.params.id
+// })
+// 请求该类别下的所有文章
+const articleData = ref([])
+
+function handleGoArticle(e) {
+  console.log(e.id);
+  router.push(`/article/${e.id}`)
+}
+</script>
+
+<template>
+  <div class="the-page">
+    <div class="article-list">
+      <template v-if="articleData.length > 0">
+        <div class="article-item" v-for="article in articleData" :key="article.id">
+          <div class="article-item__left">
+            <div class="article-item__id"> {{ article.serial }} </div>
+          </div>
+          <div class="article-item__right">
+            <div class="article-item__title" @click="handleGoArticle(article)"> {{ article.title }} </div>
+            <div class="article-item__creatTime"> {{ article.created_time }} </div>
+          </div>
+        </div>
+      </template>
+      <div v-else>
+        <div style="text-align: center;font-size: 26px;padding: 20px;">抱歉~ 该分类下暂无文章</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style type="text/css" lang="less" scoped>
+.article-list {
+  flex-direction: column;
+  display: flex;
+  padding-top: 10px;
+  margin: 0px auto;
+  width: 1200px;
+  background-color: rgba(255, 255, 255, 0.711);
+  border-radius: 0 0 0 10px;
+
+  .article-item {
+    display: flex;
+    border-bottom: 1px solid #8882;
+    padding: 4px 0 2px;
+    background-color: transparent;
+    transition: .5s all;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: #ddd;
+    }
+
+    .article-item__left {
+      width: 40px;
+      text-align: left;
+
+      .article-item__id {
+        color: #888;
+        font-size: 20px;
+        margin-left: 14px;
+        margin-top: -2px;
+        font-weight: 600;
+      }
+    }
+
+    .article-item__right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-size: 12px;
+      color: #888;
+
+      .article-item__title {
+        cursor: pointer;
+        font-size: 14px;
+        color: #000;
+
+        &:hover {
+          background-color: #2f393ad1;
+          color: #fff;
+        }
+
+      }
+    }
+  }
+}
+</style>
