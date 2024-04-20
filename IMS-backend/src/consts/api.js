@@ -11,5 +11,7 @@ export default {
   role: `${ADMIN_PREFIX}/api/permission/role`,
   user: `${ADMIN_PREFIX}/api/permission/user`,
   article: `${ADMIN_PREFIX}/api/article`,
-  classification: `${ADMIN_PREFIX}/api/classification`
+  classification: `${ADMIN_PREFIX}/api/classification`,
+
+  music: `${ADMIN_PREFIX}/api/music`
 };

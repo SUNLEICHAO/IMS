@@ -6,6 +6,7 @@ import Forbidden from '@/views/Common/Forbidden.vue';
 import AccountLogin from '@/views/Common/AccountLogin.vue';
 import routesPermission from './routesPermission';
 import routesArticle from './routesArticle';
+import routesMusic from './routesMusic';
 
 export default [
   {
@@ -22,7 +23,8 @@ export default [
         component: Home
       },
       ...routesPermission,
-      ...routesArticle
+      ...routesArticle,
+      ...routesMusic
     ]
   },
   {

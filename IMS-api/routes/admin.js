@@ -42,4 +42,11 @@ router.post("/api/article", articleController.insert);
 router.delete("/api/article/:id", articleController.delete);
 router.put("/api/article", articleController.update);
 
+
+// 音乐篇
+const musicController = require("../controllers/music");
+
+router.get("/api/music", musicController.getAll);
+
+
 module.exports = router;

@@ -1,35 +1,38 @@
-const config = require('../knexfile');
-const knex = require('knex')(config);
+const config = require("../knexfile");
+const knex = require("knex")(config);
 
 class base {
   constructor(props) {
     this.table = props;
   }
 
+  knex() {
+    return knex(this.table);
+  }
+
   // 获取全部数据
   all() {
-    return knex(this.table).select()
+    return knex(this.table).select();
   }
 
   select(params) {
-    return knex(this.table).select().where(params)
+    return knex(this.table).select().where(params);
   }
 
   // 插入
   insert(params) {
-    return knex(this.table).insert(params)
+    return knex(this.table).insert(params);
   }
 
   // 修改
   update(id, params) {
-    return knex(this.table).where('id', id).update(params)
+    return knex(this.table).where("id", id).update(params);
   }
 
   // 删除
   delete(id) {
-    return knex(this.table).where('id', id).del()
+    return knex(this.table).where("id", id).del();
   }
-  
 }
 
 module.exports = base;

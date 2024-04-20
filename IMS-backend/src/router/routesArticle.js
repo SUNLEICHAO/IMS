@@ -1,4 +1,3 @@
-const ArticleLayout = () => import('@/components/Layout/ArticleLayout.vue');
 const ArticleIndex = () =>
   import(/* webpackChunkName: "article" */ '@/views/Article/ArticleIndex.vue');
 const ArticleEdit = () =>
@@ -15,7 +14,6 @@ export default [
     path: '/article',
     name: 'Article',
     redirect: { name: 'ArticleIndex' },
-    component: ArticleLayout,
     meta: {
       permission: 'article-index,article-classify',
       title: '文章管理',

@@ -20,6 +20,7 @@ function getData() {
     articleData.value = res.data.result
   })
 }
+
 function handleDeleteArticle(scope) {
   ElMessageBox.confirm(
     '该操作将删除该文章，确认？',
@@ -58,13 +59,13 @@ function handleGoEdit(scope) {
   <div class="the-page article-index">
     <ArticleHeader title="文章列表">
       <template v-slot:right>
-        <span class="header-action" @click="router.push('/article/create')">新建文章</span>
+        <el-button type="primary" round @click="router.push('/article/create')">新建文章</el-button>
       </template>
     </ArticleHeader>
     <div class="page-body">
       <div class="table-section">
-        <el-table :data="articleData" style="width: 1000px;">
-          <el-table-column prop="id" label="编号" width="120" />
+        <el-table :data="articleData" style="width: 1000px;" row-style="overflow: hidden;">
+          <el-table-column prop="id" label="编号" width=120 />
           <el-table-column prop="title" label="标题" />
           <el-table-column prop="classification_name" label="分类" width="160" />
           <el-table-column prop="action" label="操作">
@@ -94,20 +95,21 @@ function handleGoEdit(scope) {
 .the-page {
   .item-action {
     margin-left: 10px;
+
   }
 
-  .header-action {
-    color: #639137;
-    transition: all 1s;
-    font-size: 20px;
-    text-decoration: none;
-    font-weight: 400;
-    cursor: pointer;
+  // .header-action {
+  //   color: #639137;
+  //   transition: all 1s;
+  //   font-size: 20px;
+  //   text-decoration: none;
+  //   font-weight: 400;
+  //   cursor: pointer;
 
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  //   &:hover {
+  //     text-decoration: underline;
+  //   }
+  // }
 
   .page-body {
     .table-section {

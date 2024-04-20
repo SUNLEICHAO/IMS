@@ -23,11 +23,13 @@ const breadcrumb = computed(() => route.matched.filter((data) => data.meta.bread
             <el-breadcrumb>
               <el-breadcrumb-item v-for="step in breadcrumb" :key="step.name">
                 <el-breadcrumb-item :to="{ name: step.meta.breadcrumb.path }" :key="step.name" :replace="true">{{
-                step.meta.breadcrumb.name }}</el-breadcrumb-item>
+                  step.meta.breadcrumb.name }}</el-breadcrumb-item>
               </el-breadcrumb-item>
             </el-breadcrumb>
           </div>
-          <router-view></router-view>
+          <div class="content-container">
+            <router-view></router-view>
+          </div>
         </el-scrollbar>
       </div>
       <BasicLayoutFooter />
@@ -47,20 +49,28 @@ const breadcrumb = computed(() => route.matched.filter((data) => data.meta.bread
   display: flex;
   flex-direction: column;
 
+  .page-header {
+    flex: none;
+  }
+
   .page-body {
     flex: 1;
     padding: 28px 24px 0;
     height: 1px;
+
+    .breadcrumb-container {
+      flex: none;
+      width: 100%;
+      padding: 4px 8px;
+      padding-left: 0;
+    }
+
+    .content-container {
+      padding: 10px;
+    }
+
   }
 
-  .breadcrumb-container {
-    flex: none;
-    width: 100%;
-    padding: 4px 8px;
-  }
 
-  .page-header {
-    flex: none;
-  }
 }
 </style>

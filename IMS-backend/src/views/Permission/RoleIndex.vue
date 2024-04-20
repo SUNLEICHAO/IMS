@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, inject, reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import roleService from '@/services/role.js';
 import { useRouter } from 'vue-router';
 
@@ -49,41 +49,30 @@ let handleAdd = function () {
 </script>
 
 <template>
-  <div class="role-index main-topic">角色管理</div>
-  <div class="table">
-    <el-table :data="roles" stripe style="width: 100%">
-      <el-table-column prop="id" label="角色ID" width="100" />
-      <el-table-column prop="name" label="角色名称" width="180" />
-      <el-table-column prop="desc" label="描述" width="180" />
-      <el-table-column label="操作">
+  <div class="role-page">
+    
+    <el-table :data="roles" style="width: 100%">
+      <el-table-column prop="id" label="#" width="100" />
+      <el-table-column prop="name" label="角色名称" />
+      <el-table-column prop="desc" label="描述" />
+      <el-table-column label="操作" width="180">
         <template #default="scope">
           <el-button link type="primary" @click="handleEdit(scope.row)">修改</el-button>
           <el-button link type="danger" @click="handleDelete(scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-button class="mt-4 role-add" @click="handleAdd">添加角色</el-button>
+    <el-divider />
+    <div class="page-header">
+      <el-button class="mt-4 role-add" @click="handleAdd">添加角色</el-button>
+    </div>
   </div>
 </template>
 <style type="text/css" lang="less" scoped>
-.table {
-  width: 700px;
-
-  .el-table {
-    font-size: 18px;
-
-    .el-table-column {
-      text-align: center;
-      font-size: 30px;
-    }
-  }
-
+.role-page {
+  text-align: right;
 
   .role-add {
-    width: 150px;
-    margin: 0 auto;
-    display: block;
-    margin-top: 20px;
   }
 }
 </style>

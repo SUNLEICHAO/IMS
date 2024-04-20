@@ -1,4 +1,3 @@
-const PermissionLayout = () => import('@/components/Layout/PermissionLayout.vue');
 const RoleIndex = () =>
   import(/* webpackChunkName: "permission" */ '@/views/Permission/RoleIndex.vue');
 const RoleEdit = () =>
@@ -17,8 +16,6 @@ export default [
     path: '/permission',
     name: 'Permission',
     redirect: { name: 'RoleIndex' },
-    component: PermissionLayout,
-
     meta: {
       permission: 'role-index,manager-index',
       title: '权限设置',

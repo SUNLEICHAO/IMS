@@ -46,7 +46,9 @@ function handleGoArticle(e) {
             <div class="article-item__id"> {{ article.serial }} </div>
           </div>
           <div class="article-item__right">
-            <div class="article-item__title" @click="handleGoArticle(article)"> {{ article.title }} </div>
+            <div class="article-item__title" @click="handleGoArticle(article)">
+              {{ article.title }}
+            </div>
             <div class="article-item__creatTime"> {{ article.created_time }} </div>
           </div>
         </div>
@@ -67,6 +69,7 @@ function handleGoArticle(e) {
   width: 1200px;
   background-color: rgba(255, 255, 255, 0.711);
   border-radius: 0 0 0 10px;
+  overflow: hidden;
 
   .article-item {
     display: flex;
@@ -105,14 +108,9 @@ function handleGoArticle(e) {
 
       .article-item__title {
         cursor: pointer;
+        display: inline-block;
         font-size: 14px;
         color: #000;
-
-        &:hover {
-          background-color: #2f393ad1;
-          color: #fff;
-        }
-
       }
     }
   }

@@ -3,8 +3,10 @@ import { ref, onMounted, computed } from 'vue';
 import ArticleHeader from "@/components/Common/ArticleHeader.vue"
 import { useRoute, useRouter, RouterView } from 'vue-router';
 import { ElMessage } from 'element-plus'
+import ImageUploader from 'quill-image-uploader';
 
 import articleService from '@/services/article';
+import ossService from '@/services/oss';
 import classificationService from '@/services/classification';
 
 onMounted(() => {
@@ -23,6 +25,65 @@ const articleForm = ref({
 const classifications = ref([])
 const quillEditor = ref(null);
 
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],
+  ['blockquote', 'code-block'],
+  [{ 'header': 1 }, { 'header': 2 }],
+  [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+  [{ 'script': 'sub' }, { 'script': 'super' }],
+  [{ 'indent': '-1' }, { 'indent': '+1' }],
+  [{ 'direction': 'rtl' }],
+  [{ 'size': ['small', false, 'large', 'huge'] }],
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+  [{ 'color': [] }, { 'background': [] }],
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+  ['clean'],
+  ['link', 'image', 'video'],
+];
+
+const options = {
+  theme: 'snow',
+  placeholder: '请在此输入内容',
+  modules: {
+    name: 'imageUploader',
+    module: ImageUploader,
+    options: {
+      upload: file => {
+        return new Promise((resolve, reject) => {
+          // const formData = new FormData();
+          // formData.append("image", file);
+          console.log('要上传~');
+          ossService.upload({ file, space: 'ims', folder: 'article' },
+            (res => { 
+              console.log(res);
+              resolve(res.url);
+             }),
+            (error => { console.log(error); }),
+            (end => { console.log(end); }),
+            (res => { console.log(res); }),
+          )
+            .then(res => {
+              console.log(res)
+              // resolve(res.data.url);
+              resolve(res);
+              // resolve('sss');
+            })
+            .catch(err => {
+              reject("Upload failed");
+              console.error("Error:", err)
+            })
+          // console.log('ssss图片');
+          // setTimeout(() => {
+          //   resolve(
+          //     "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png"
+          //   );
+          // }, 3500);
+        })
+      }
+    }
+  },
+}
 
 
 
@@ -57,6 +118,7 @@ function handleReset() {
       </ArticleHeader>
     </div>
     <div class="page-body">
+      {{ articleForm.content }}
       <div class="input-section">
         <el-form :model="articleForm" label-width="auto" style="max-width: 600px">
           <el-form-item label="标题">
@@ -69,7 +131,7 @@ function handleReset() {
           </el-form-item>
           <el-form-item label="内容">
             <QuillEditor ref="quillEditor" style="width: 800px; height: 300px;" v-model:content="articleForm.content"
-              theme="snow" placeholder="请在此输入内容" contentType="html" toolbar="full" />
+              contentType="html" :options="options" :modules="options.modules" :toolbar="toolbarOptions" />
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">提交</el-button>
