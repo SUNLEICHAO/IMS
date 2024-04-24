@@ -3,10 +3,8 @@ import { ref } from 'vue'
 import userService from '@/services/user.js';
 import Cookies from 'js-cookie';
 import { useRouter } from "vue-router"
-import { useStore } from '@/store/index.js'
-// import LocalCache from '@/utils/cache'
 
-const store = useStore()
+const router = useRouter()
 const smsRules = {
   phone: [
     { required: true, message: '请输入手机号', trigger: 'blur' },
@@ -18,27 +16,19 @@ const smsRules = {
   ],
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
 }
-
 const formData = ref({
-  // code: null,
-  // phone: null,
-  code: '1234',
-  phone: '1320000000',
-  password: '1234',
+  phone: '',
+  password: '',
+  code: null,
   checked: false
 })
 const smsText = ref('发送验证码')
 const smsDisabled = ref(false)
 const loginType = ref('first')
 
-
-const router = useRouter()
-
-
 function handleSmsCode(e) {
   console.log(e);
 }
-
 function handleSubmit() {
   if (loginType.value === 'second') {
     alert('暂不支持该登陆方式')
@@ -65,7 +55,6 @@ function handleSubmit() {
     console.log(error);
   })
 }
-
 </script>
 
 <template>
